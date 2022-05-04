@@ -10,37 +10,16 @@ import SwiftUI
 import CoreData
 
 struct HomeContentView: View {
-
+    
+    @State private var searchKeyword: String = ""
+    
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    
-                    NavigationLink(destination: Text("Menu")) {
-                        Image("menu-white") .renderingMode(.original)
-                            .renderingMode(.original)
-                    }
-                    .padding(.leading, 15)
-                    
-                    Image("flipkart-logo")
-                        .resizable()
-                        .frame(width: 90, height: 30)
-                        .aspectRatio(contentMode: .fit)
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: Text("Notification")) {
-                        Image("bell-ring")
-                            .renderingMode(.original)
-                    }
-                    
-                    NavigationLink(destination: Text("Cart")) {
-                        Image("shopping-cart")
-                            .renderingMode(.original)
-                    }
-                    .padding(.trailing, 15)
+                VStack {
+                    NavigationBarContentView
+                    SearchBarContentView
                 }
-                .frame(maxWidth: .infinity, maxHeight: 45)
                 .background(AppColor.themeColor)
                 
                 Spacer()
@@ -49,14 +28,55 @@ struct HomeContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarHidden(true)
         }
-        
-        
     }
     
-    func menuButtonTapped() {
-        print("Hi")
+    var SearchBarContentView: some View {
+        TextField(
+            "Search for products, Brands and More",
+            text: $searchKeyword)
+            .background(Color.white)
+            .cornerRadius(8)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding(.bottom, 8)
+            .padding(.horizontal, 12)
     }
+    
+    
+    var NavigationBarContentView: some View {
+        HStack {
+            NavigationLink(destination: Text("Menu")) {
+                Image("menu-white") .renderingMode(.original)
+                    .renderingMode(.original)
+            }
+            
+            Image("flipkart-logo")
+                .resizable()
+                .frame(width: 90)
+                .aspectRatio(contentMode: .fit)
+            
+            Spacer()
+            
+            NavigationLink(destination: Text("Notification")) {
+                Image("bell-ring")
+                    .renderingMode(.original)
+            }
+            
+            NavigationLink(destination: Text("Cart")) {
+                Image("shopping-cart")
+                    .renderingMode(.original)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 30)
+        .padding(.top, 12)
+        .padding(.bottom, 12)
+        .padding(.leading, 12)
+        .padding(.trailing, 12)
+    }
+    
 }
+
+
+
 
 /* struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
