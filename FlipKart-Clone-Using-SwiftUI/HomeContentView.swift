@@ -11,14 +11,12 @@ import CoreData
 
 struct HomeContentView: View {
     
-    @State private var searchKeyword: String = ""
-    
     var body: some View {
         NavigationView {
             VStack {
                 VStack {
-                    NavigationBarContentView
-                    SearchBarContentView
+                    NavigationBarContentView()
+                    SearchBarContentView()
                 }
                 .background(AppColor.themeColor)
                 
@@ -29,8 +27,11 @@ struct HomeContentView: View {
             .navigationBarHidden(true)
         }
     }
-    
-    var SearchBarContentView: some View {
+}
+
+struct SearchBarContentView: View {
+    @State private var searchKeyword: String = ""
+    var body: some View {
         TextField(
             "Search for products, Brands and More",
             text: $searchKeyword)
@@ -40,9 +41,10 @@ struct HomeContentView: View {
             .padding(.bottom, 8)
             .padding(.horizontal, 12)
     }
-    
-    
-    var NavigationBarContentView: some View {
+}
+
+fileprivate struct NavigationBarContentView: View {
+    var body: some View {
         HStack {
             NavigationLink(destination: Text("Menu")) {
                 Image("menu-white") .renderingMode(.original)
