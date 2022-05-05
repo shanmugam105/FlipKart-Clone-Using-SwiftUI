@@ -8,23 +8,57 @@
 import UIKit
 import SwiftUI
 import CoreData
+import URLImage
+
+class AppConstants {
+    static let bannerImageUrl: String = "https://cdn.flipshope.com/blog/wp-content/uploads/2021/09/flipkart-big-bilion-day-1.jpg"
+    
+}
+
+struct BannerResponse: Identifiable {
+    let id: UUID = UUID()
+    let url: String
+    let name: String
+}
 
 struct HomeContentView: View {
-    
+    @State var banners: [ BannerResponse ] = []
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 VStack {
                     NavigationBarContentView()
                     SearchBarContentView()
                 }
                 .background(AppColor.themeColor)
                 
+                List(banners) { item in
+                    if let url = URL(string: item.url) {
+                        URLImage(url) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: .infinity, maxHeight: 210)
+                        }
+                    }
+                }
+                .padding(0)
+                
                 Spacer()
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarHidden(true)
+        }
+        .onAppear {
+            for i in 0...Int.random(in: 3...6) {
+                self.banners.append(
+                    BannerResponse (
+                        url: AppConstants.bannerImageUrl,
+                        name: "Banner-\(i+1)"
+                    )
+                )
+            }
         }
     }
 }
