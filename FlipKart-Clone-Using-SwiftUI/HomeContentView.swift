@@ -22,7 +22,14 @@ struct BannerResponse: Identifiable {
 }
 
 struct HomeContentView: View {
-    @State var banners: [ BannerResponse ] = []
+    @State var banners: [ BannerResponse ] = [
+        BannerResponse(url: AppConstants.bannerImageUrl, name: "1"),
+        BannerResponse(url: AppConstants.bannerImageUrl, name: "2"),
+        BannerResponse(url: AppConstants.bannerImageUrl, name: "3")
+    ]
+    
+    @State private var selectedBanner = 0
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -31,18 +38,23 @@ struct HomeContentView: View {
                     SearchBarContentView()
                 }
                 .background(AppColor.themeColor)
-                
-                List(banners) { item in
-                    if let url = URL(string: item.url) {
-                        URLImage(url) { image in
-                            image
+                TabView {
+                    ForEach(Array(banners.enumerated()), id: \.offset) { index, item in
+                        if let url = URL(string: item.url),
+                           let imageData = try? Data(contentsOf: url),
+                           let image = UIImage(data: imageData) {
+                            Image(uiImage: image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: .infinity, maxHeight: 210)
+                                .onTapGesture {
+                                    print(index)
+                                }
                         }
                     }
                 }
-                .padding(0)
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .frame(maxWidth: .infinity, maxHeight: 210)
                 
                 Spacer()
                 
@@ -51,14 +63,14 @@ struct HomeContentView: View {
             .navigationBarHidden(true)
         }
         .onAppear {
-            for i in 0...Int.random(in: 3...6) {
-                self.banners.append(
-                    BannerResponse (
-                        url: AppConstants.bannerImageUrl,
-                        name: "Banner-\(i+1)"
-                    )
-                )
-            }
+//            for i in 0...Int.random(in: 3...6) {
+//                self.banners.append(
+//                    BannerResponse (
+//                        url: AppConstants.bannerImageUrl,
+//                        name: "Banner-\(i+1)"
+//                    )
+//                )
+//            }
         }
     }
 }

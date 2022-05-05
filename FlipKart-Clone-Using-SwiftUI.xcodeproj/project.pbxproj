@@ -15,6 +15,7 @@
 		040CF54C281D3B02004936F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040CF54B281D3B02004936F5 /* Preview Assets.xcassets */; };
 		040CF54E281D3B02004936F5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040CF54D281D3B02004936F5 /* Persistence.swift */; };
 		040CF551281D3B02004936F5 /* FlipKart_Clone_Using_SwiftUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 040CF54F281D3B02004936F5 /* FlipKart_Clone_Using_SwiftUI.xcdatamodeld */; };
+		04BBFD952823DE61003F1510 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BBFD942823DE61003F1510 /* AsyncImage.swift */; };
 		04C6FE29281D60A3002A6230 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6FE28281D60A3002A6230 /* AppColor.swift */; };
 		04C6FE2C281D690E002A6230 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C6FE2B281D690E002A6230 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		040CF54D281D3B02004936F5 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		040CF550281D3B02004936F5 /* FlipKart_Clone_Using_SwiftUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlipKart_Clone_Using_SwiftUI.xcdatamodel; sourceTree = "<group>"; };
 		040CF556281D3B02004936F5 /* FlipKart-Clone-Using-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FlipKart-Clone-Using-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04BBFD942823DE61003F1510 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		04C6FE28281D60A3002A6230 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		04C6FE2A281D65E3002A6230 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		04C6FE2B281D690E002A6230 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				040CF54D281D3B02004936F5 /* Persistence.swift */,
 				04C6FE28281D60A3002A6230 /* AppColor.swift */,
+				04BBFD942823DE61003F1510 /* AsyncImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				04C6FE29281D60A3002A6230 /* AppColor.swift in Sources */,
 				040CF551281D3B02004936F5 /* FlipKart_Clone_Using_SwiftUI.xcdatamodeld in Sources */,
 				040CF547281D3AFD004936F5 /* HomeContentView.swift in Sources */,
+				04BBFD952823DE61003F1510 /* AsyncImage.swift in Sources */,
 				040CF545281D3AFD004936F5 /* FlipKart_Clone_Using_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
