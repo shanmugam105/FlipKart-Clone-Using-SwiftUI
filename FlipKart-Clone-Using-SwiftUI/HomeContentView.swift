@@ -18,6 +18,11 @@ struct ImageTitleResponse: Identifiable {
     let id: UUID = UUID()
     let imageUrl: String
     let title: String
+    
+    init(imageUrl: String, title: String) {
+        self.imageUrl = imageUrl
+        self.title    = title
+    }
 }
 
 struct HomeContentView: View {
@@ -31,13 +36,15 @@ struct HomeContentView: View {
                 }
                 .background(AppColor.themeColor)
                 ScrollView {
-                    // Image Slider
-                    ImageSliderContentView()
-                    .tabViewStyle(PageTabViewStyle())
-                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                    .frame(maxWidth: .infinity, maxHeight: 210)
-                    // Special offer
-                    OffersGridContentView()
+                    VStack(spacing: 0) {
+                        // Image Slider
+                        ImageSliderContentView()
+                        .tabViewStyle(PageTabViewStyle())
+                        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                        .frame(maxWidth: .infinity, maxHeight: 210)
+                        // Special offer
+                        OffersGridContentView()
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -62,9 +69,8 @@ struct OffersGridContentView: View {
     ]
 
     private var specialOffersGrid: [ GridItem ] {
-        let size = screenSize.width / 5 - 4
+        let size = (screenSize.width / 4 - 4) - 4
         return [ GridItem(.fixed(size), spacing: 4),
-                 GridItem(.fixed(size), spacing: 4),
                  GridItem(.fixed(size), spacing: 4),
                  GridItem(.fixed(size), spacing: 4),
                  GridItem(.fixed(size), spacing: 4) ]
@@ -72,7 +78,7 @@ struct OffersGridContentView: View {
     
     var body: some View {
         // Title
-        HStack {
+        HStack(spacing: 0) {
             Text("Special offers")
                 .fontWeight(.bold)
                 .padding(8)
@@ -82,23 +88,26 @@ struct OffersGridContentView: View {
         LazyVGrid(columns: specialOffersGrid, spacing: 8) {
             ForEach(Array(offerItems.enumerated()), id: \.offset) { index, item in
                 VStack(spacing: 0) {
-                    let width = screenSize.width / 5
+                    let width = screenSize.width / 4 - 4
                     Image(item.imageUrl)
                         .resizable()
                         .frame(maxWidth: width, maxHeight: width)
                         .aspectRatio(contentMode: .fit)
-                        .cornerRadius(screenSize.width / 10)
+                        .cornerRadius(screenSize.width / 8 - 2)
                     Text(item.title)
                         .fontWeight(.medium)
                         .frame(minHeight: 30)
+                        .lineLimit(1)
                     
                 }
-                .frame(maxWidth: screenSize.width / 5, minHeight: (screenSize.width / 5) + 30)
+                .frame(maxWidth: .infinity / 4 - 4, minHeight: screenSize.width / 5 + 30)
                 .onTapGesture {
                     print(index)
                 }
+                
             }
         }
+        .padding(8)
     }
 }
 
