@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040C10B12822763500C6CF4E /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 040C10B02822763500C6CF4E /* URLImage */; };
-		040C10B32822763500C6CF4E /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 040C10B22822763500C6CF4E /* URLImageStore */; };
 		040CF545281D3AFD004936F5 /* FlipKart_Clone_Using_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040CF544281D3AFD004936F5 /* FlipKart_Clone_Using_SwiftUIApp.swift */; };
 		040CF547281D3AFD004936F5 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040CF546281D3AFD004936F5 /* HomeContentView.swift */; };
 		040CF549281D3B02004936F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040CF548281D3B02004936F5 /* Assets.xcassets */; };
@@ -50,8 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040C10B32822763500C6CF4E /* URLImageStore in Frameworks */,
-				040C10B12822763500C6CF4E /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +144,6 @@
 			);
 			name = "FlipKart-Clone-Using-SwiftUI";
 			packageProductDependencies = (
-				040C10B02822763500C6CF4E /* URLImage */,
-				040C10B22822763500C6CF4E /* URLImageStore */,
 			);
 			productName = "FlipKart-Clone-Using-SwiftUI";
 			productReference = 040CF541281D3AFD004936F5 /* FlipKart-Clone-Using-SwiftUI.app */;
@@ -202,7 +196,6 @@
 			);
 			mainGroup = 040CF538281D3AFD004936F5;
 			packageReferences = (
-				040C10AF2822763500C6CF4E /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 040CF542281D3AFD004936F5 /* Products */;
 			projectDirPath = "";
@@ -515,30 +508,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		040C10AF2822763500C6CF4E /* XCRemoteSwiftPackageReference "url-image" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		040C10B02822763500C6CF4E /* URLImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 040C10AF2822763500C6CF4E /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImage;
-		};
-		040C10B22822763500C6CF4E /* URLImageStore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 040C10AF2822763500C6CF4E /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImageStore;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		040CF54F281D3B02004936F5 /* FlipKart_Clone_Using_SwiftUI.xcdatamodeld */ = {

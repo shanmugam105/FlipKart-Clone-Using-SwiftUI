@@ -8,27 +8,19 @@
 import UIKit
 import SwiftUI
 import CoreData
-import URLImage
 
 class AppConstants {
     static let bannerImageUrl: String = "https://cdn.flipshope.com/blog/wp-content/uploads/2021/09/flipkart-big-bilion-day-1.jpg"
     
 }
 
-struct BannerResponse: Identifiable {
+struct ImageTitleResponse: Identifiable {
     let id: UUID = UUID()
-    let url: String
-    let name: String
+    let imageUrl: String
+    let title: String
 }
 
 struct HomeContentView: View {
-    @State var banners: [ BannerResponse ] = [
-        BannerResponse(url: AppConstants.bannerImageUrl, name: "1"),
-        BannerResponse(url: AppConstants.bannerImageUrl, name: "2"),
-        BannerResponse(url: AppConstants.bannerImageUrl, name: "3")
-    ]
-    
-    @State private var selectedBanner = 0
     
     var body: some View {
         NavigationView {
@@ -38,40 +30,100 @@ struct HomeContentView: View {
                     SearchBarContentView()
                 }
                 .background(AppColor.themeColor)
-                TabView {
-                    ForEach(Array(banners.enumerated()), id: \.offset) { index, item in
-                        if let url = URL(string: item.url),
-                           let imageData = try? Data(contentsOf: url),
-                           let image = UIImage(data: imageData) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .onTapGesture {
-                                    print(index)
-                                }
-                        }
-                    }
+                ScrollView {
+                    // Image Slider
+                    ImageSliderContentView()
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                    .frame(maxWidth: .infinity, maxHeight: 210)
+                    // Special offer
+                    OffersGridContentView()
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                .frame(maxWidth: .infinity, maxHeight: 210)
-                
-                Spacer()
-                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarHidden(true)
         }
-        .onAppear {
-//            for i in 0...Int.random(in: 3...6) {
-//                self.banners.append(
-//                    BannerResponse (
-//                        url: AppConstants.bannerImageUrl,
-//                        name: "Banner-\(i+1)"
-//                    )
-//                )
-//            }
+    }
+}
+
+struct OffersGridContentView: View {
+    @State var screenSize: CGSize = UIScreen.main.bounds.size
+    let offerItems: [ ImageTitleResponse ] = [
+        // Row 1
+        ImageTitleResponse(imageUrl: "offer_1", title: "Offer 1"),
+        ImageTitleResponse(imageUrl: "offer_2", title: "Offer 2"),
+        ImageTitleResponse(imageUrl: "offer_3", title: "Offer 3"),
+        ImageTitleResponse(imageUrl: "offer_4", title: "Offer 4"),
+        ImageTitleResponse(imageUrl: "offer_5", title: "Offer 5"),
+        // Row 2
+        ImageTitleResponse(imageUrl: "offer_1", title: "Offer 1"),
+        ImageTitleResponse(imageUrl: "offer_2", title: "Offer 2"),
+        ImageTitleResponse(imageUrl: "offer_3", title: "Offer 3"),
+    ]
+
+    private var specialOffersGrid: [ GridItem ] {
+        let size = screenSize.width / 5 - 4
+        return [ GridItem(.fixed(size), spacing: 4),
+                 GridItem(.fixed(size), spacing: 4),
+                 GridItem(.fixed(size), spacing: 4),
+                 GridItem(.fixed(size), spacing: 4),
+                 GridItem(.fixed(size), spacing: 4) ]
+    }
+    
+    var body: some View {
+        // Title
+        HStack {
+            Text("Special offers")
+                .fontWeight(.bold)
+                .padding(8)
+            Spacer()
         }
+        // GridView
+        LazyVGrid(columns: specialOffersGrid, spacing: 8) {
+            ForEach(Array(offerItems.enumerated()), id: \.offset) { index, item in
+                VStack(spacing: 0) {
+                    let width = screenSize.width / 5
+                    Image(item.imageUrl)
+                        .resizable()
+                        .frame(maxWidth: width, maxHeight: width)
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(screenSize.width / 10)
+                    Text(item.title)
+                        .fontWeight(.medium)
+                        .frame(minHeight: 30)
+                    
+                }
+                .frame(maxWidth: screenSize.width / 5, minHeight: (screenSize.width / 5) + 30)
+                .onTapGesture {
+                    print(index)
+                }
+            }
+        }
+    }
+}
+
+struct ImageSliderContentView: View {
+    @State var banners: [ ImageTitleResponse ] = [
+        ImageTitleResponse(imageUrl: AppConstants.bannerImageUrl, title: "1"),
+        ImageTitleResponse(imageUrl: AppConstants.bannerImageUrl, title: "2"),
+        ImageTitleResponse(imageUrl: AppConstants.bannerImageUrl, title: "3")
+    ]
+    var body: some View {
+        TabView {
+            ForEach(Array(banners.enumerated()), id: \.offset) { index, item in
+                if let url = URL(string: item.imageUrl),
+                   let imageData = try? Data(contentsOf: url),
+                   let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .onTapGesture {
+                            print(index)
+                        }
+                }
+            }
+        }
+        .frame(height: 210)
     }
 }
 
